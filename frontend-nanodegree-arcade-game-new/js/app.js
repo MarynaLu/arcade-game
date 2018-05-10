@@ -313,10 +313,10 @@ function removeGem(gemToRemove){
 
 //recreating gems (clearing the allGems array & switching their positions)
 function recreateGems(gemToPush){
-	// allGems.clear();
-	// allGems.add(blueGem);
-	// allGems.add(orangeGem);
-	// allGems.add(greenGem);
+	allGems.clear();
+	allGems.add(blueGem);
+	allGems.add(orangeGem);
+	allGems.add(greenGem);
 
     blueGem.x = 310;
     blueGem.y = 95;
@@ -365,7 +365,6 @@ let greenGem = new Gem(310, 265, 'images/Gem Green.png');
 
 //storing all gems in the array
 let allGems = new Set([blueGem, orangeGem, greenGem]);
-let gemsToRecreate = new Set([blueGem, orangeGem, greenGem]);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

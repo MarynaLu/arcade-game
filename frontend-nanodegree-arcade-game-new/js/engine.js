@@ -96,16 +96,9 @@ var Engine = (function(global) {
         });
         player.update();
         
-        if(scoreBoard.score < 500){
-            allGems.forEach(function(gem) {
+        allGems.forEach(function(gem) {
                gem.update();
-            });
-        } else if(scoreBoard.score >= 500){
-            console.log(gemsToRecreate);
-             gemsToRecreate.forEach(function(gem) {
-               gem.update();
-            });
-        }
+        });
     }
 
 
