@@ -9,6 +9,7 @@ var spans = document.getElementsByClassName("close");
 //restart button on the modals
 var restartButton = document.getElementsByClassName("restart");
 
+
 //closing modals on the click of 'x'
 //lives over
 spans[0].onclick = function() {
@@ -46,9 +47,10 @@ restartButton[0].onclick = function(){
     scoreBoard.score = 0;
 
     //reset the collisionCounter to 0 so the player can start with 3 lives again
-    allEnemies.forEach(function(enemy){
-        enemy.collisionCounter = 0;
-    });
+    // allEnemies.forEach(function(enemy){
+    //     enemy.collisionCounter = 0;
+    // });
+    collisionCounter = 0;
 }
 
 //game won
@@ -66,10 +68,10 @@ restartButton[1].onclick = function(){
     scoreBoard.score = 0;
 
     //reset the collisionCounter to 0 so the player can start with 3 lives again
-    allEnemies.forEach(function(enemy){
-        enemy.collisionCounter = 0;
-    });
-    
+    // allEnemies.forEach(function(enemy){
+    //     enemy.collisionCounter = 0;
+    // });
+    collisionCounter = 0;
 }
 
 function showHearts(){
@@ -84,6 +86,9 @@ function restartBugs(array){
     });
 };
 
+//setting up a collision counter variable 
+var collisionCounter = 0;
+
 class Enemy {
     constructor(z, speed) {
     // Variables applied to each of our instances go here,
@@ -95,7 +100,7 @@ class Enemy {
         this.x = -70;
         this.y = z;
         this.speed = speed;
-        this.collisionCounter = 0;
+        // this.collisionCounter = 0;
     }
     
     // Update the enemy's position, required method for game
@@ -117,18 +122,18 @@ class Enemy {
                 player.y = 400;
                 
                 //if the collision occurs, remove one of the hearts
-                switch(this.collisionCounter){
+                switch(collisionCounter){
                     case 0:
                         heart3.remove();
-                        this.collisionCounter = 1;
+                        collisionCounter = 1;
                         break;
                     case 1:
                         heart2.remove();
-                        this.collisionCounter = 2;
+                        collisionCounter = 2;
                         break;
                     case 2:
                         heart1.remove();
-                        this.collisionCounter = 3;
+                        collisionCounter = 3;
                         //show the modal saying that the lives are finished
                         modals[0].classList.toggle("opened");
 
@@ -207,6 +212,7 @@ class Player {
         }
     }
 
+
     //reset the player to the initial position once it reached the water
     reset(){
         if(this.y === 0){
@@ -266,8 +272,10 @@ class Score {
     }
 }
 
-//create collectibles
 
+//create a variable to store the score
+var gemScore = 500;
+//create collectibles
 class Gem {
     constructor(positionX, positionY, sprite){
         this.sprite = sprite;
@@ -289,8 +297,9 @@ class Gem {
         }
 
         //if score is more than 500, recreate gems
-        if (scoreBoard.score >= 500){
+        if (scoreBoard.score >= gemScore){
             recreateGems(this);
+            gemScore += 500;
         };
     };
 
